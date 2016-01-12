@@ -10,8 +10,6 @@ char RPGCNT;            // Used to display RPG changes
 
 // For stability reasons, create an EVEN number of elements in any given array
 const char LCDstr[]  = {0x33,0x32,0x28,0x01,0x0c,0x06,0x00,0x00};// LCD Initialization string
-const char StrtStr[] = {0x80,'H','e','l','l','o',',',' ',' ',0};// Startup screen
-const char BYTE_1[]  = {0xC0,'W','o','r','l','d','!',' ',' ',0};// Write "BYTE=" 1st line of LCD
 const char Clear1[]  = {0x80,' ',' ',' ',' ',' ',' ',' ',' ',0};// Clear line 1
 const char Clear2[]  = {0xC0,' ',' ',' ',' ',' ',' ',' ',' ',0};// Clear line 2
 
@@ -111,9 +109,7 @@ void Initial()
  *
  * Initialize the Optrex 8x2 character LCD.
  * First wait for 0.1 second, to get past display's power-on reset time.
- *******************************
- */
-
+ ********************************/
 void InitLCD()
 {
     char currentChar;
@@ -209,8 +205,11 @@ void arithmetic(unsigned char * displayString, unsigned char result){
 	return;
 }
 
+/******************************************************************************
+	void calcDenominator()
+	calculates denominator the reading of A/D Converter is to be borken up into denominator of parts
+ ******************************************************************************/
 unsigned short calcDenominator(unsigned short denom, unsigned char numBits){
-
 	char i;
 	for(i=0;i<numBits;i++){
 		denom= denom *2;
@@ -230,23 +229,17 @@ while ( ADReading > 1.0 ) {
   myString[1]++;
   ADReading -= 1.0;
 }
- 
 
- 
 while ( ADReading > 0.1 ) {
     myString[3]++;
     ADReading -= 0.1;
 }
- 
 
- 
- 
 while ( ADReading > 0.01 ) {
    myString[4]++;
    ADReading -= 0.01;
 }
  
-
 myString[1] += 0x30;
 myString[3] += 0x30;
 myString[4] += 0x30;
